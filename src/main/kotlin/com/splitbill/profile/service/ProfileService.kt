@@ -4,5 +4,5 @@ import com.splitbill.profile.model.ProfileModel
 
 interface ProfileService {
 
-    fun createProfile(email: String, password: String?): ProfileModel
+    fun createProfile(email: String, password: String): ProfileModel
 }

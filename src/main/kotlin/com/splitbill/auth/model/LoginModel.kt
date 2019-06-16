@@ -1,15 +1,14 @@
 package com.splitbill.auth.model
 
+import com.splitbill.model.Model
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
-@Document
-data class LoginModel(
+@Document("login") data class LoginModel(
         val userId: String,
         val email: String,
-        val passwordHash: String
-) {
+        val passwordHash: String): Model() {
 
     @Id
-    val loginId: String? = null
+    var loginId: String? = null
 }

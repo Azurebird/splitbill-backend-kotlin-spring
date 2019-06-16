@@ -2,5 +2,8 @@ package com.splitbill.profile.repository
 
 import com.splitbill.profile.model.ProfileModel
 import org.springframework.data.mongodb.repository.MongoRepository
+import org.springframework.data.repository.CrudRepository
+import org.springframework.data.repository.NoRepositoryBean
 
-interface ProfileRepository: MongoRepository<ProfileModel, String>
+@NoRepositoryBean
+interface ProfileRepository: CrudRepository<ProfileModel, String>
