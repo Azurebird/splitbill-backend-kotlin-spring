@@ -12,7 +12,11 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.boot.ansi.AnsiOutput.setEnabled
 import org.springframework.boot.web.servlet.FilterRegistrationBean
 import org.springframework.http.HttpMethod
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter
+import org.springframework.security.web.util.matcher.NegatedRequestMatcher
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
 
 
 @Configuration
@@ -21,8 +25,19 @@ class RestSecurityConfig(
     val tokenAuthenticationProvider: TokenAuthenticationProvider
 ): WebSecurityConfigurerAdapter() {
 
+    /**
+     * TODO("Pending to use tis urls as the protected ones")
+     */
     private val publicUrls = OrRequestMatcher(
-            AntPathRequestMatcher("/public/**")
+            AntPathRequestMatcher("/profile/"),
+            AntPathRequestMatcher("/login/")
+    )
+
+    /**
+     * Protected urls patterns in which the authentication should be used
+     */
+    private val protectedUrls = OrRequestMatcher(
+            AntPathRequestMatcher("/group/")
     )
 
     /**
@@ -34,32 +49,64 @@ class RestSecurityConfig(
         auth?.authenticationProvider(tokenAuthenticationProvider)
     }
 
+    /**
+     * Configuration for the api rest security
+     *
+     * @param http
+     */
     override fun configure(http: HttpSecurity) {
         http.csrf().disable()
 
-        http.authenticationProvider(tokenAuthenticationProvider)
+        http
+            .authenticationProvider(tokenAuthenticationProvider)
             .addFilterBefore(restAuthenticationFilter(), AnonymousAuthenticationFilter::class.java)
             .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/profile/").permitAll()
                 .antMatchers(HttpMethod.POST, "/login/").permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers(protectedUrls).authenticated()
+            .and()
+            .csrf().disable()
+            .formLogin().disable()
+            .httpBasic().disable()
+            .logout().disable()
     }
 
+    /**
+     * Creates a new TokenAuthenticationFilter to be used for the protected urls
+     *
+     * @return A new TokenAuthenticationFilter
+     */
     @Bean
     fun restAuthenticationFilter(): TokenAuthenticationFilter {
-        val filter = TokenAuthenticationFilter(publicUrls)
+        val filter = TokenAuthenticationFilter(protectedUrls)
         filter.setAuthenticationManager(authenticationManager())
-        //filter.setAuthenticationSuccessHandler(successHandler())
+        filter.setAuthenticationSuccessHandler(successHandler())
         return filter
     }
 
-    /*@Bean
-    fun successHandler(): SimpleUrlAuthenticationSuccessHandler {
-        return SimpleUrlAuthenticationSuccessHandler()
-    }*/
-
+    /**
+     * Since the default behaviour of the success handler is to redirect, it's necessary to overwrite this strategy
+     * with an empty body, this way it won't do anything
+     *
+     * @return An success handler with an empty redirect strategy
+     */
     @Bean
-    fun disableAutoRegistration(filter: TokenAuthenticationFilter): FilterRegistrationBean<*> {
+    fun successHandler(): SimpleUrlAuthenticationSuccessHandler {
+        val successHandler = SimpleUrlAuthenticationSuccessHandler()
+        successHandler.setRedirectStrategy{ _: HttpServletRequest, _: HttpServletResponse, _: String -> }
+        return successHandler
+    }
+
+
+    /**
+     * Prevents any annotated filter to be added automatically by the spring IoC
+     * TODO("Need to see this in action")
+     *
+     * @param filter
+     * @return
+     */
+    @Bean
+    fun disableAutoRegistration(filter: AbstractAuthenticationProcessingFilter): FilterRegistrationBean<*> {
         val registration = FilterRegistrationBean(filter)
         registration.isEnabled = false
         return registration

@@ -26,6 +26,9 @@ class TokenAuthenticationFilter (
         return this.authenticationManager.authenticate(auth)
     }
 
+    /**
+     * In case of a successful authentication the next filter in the chain should be called
+     */
     override fun successfulAuthentication(request: HttpServletRequest?, response: HttpServletResponse?, chain: FilterChain?, authResult: Authentication?) {
         super.successfulAuthentication(request, response, chain, authResult)
         chain?.doFilter(request, response)
