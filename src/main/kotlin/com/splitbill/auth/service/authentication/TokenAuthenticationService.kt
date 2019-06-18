@@ -1,16 +1,16 @@
-package com.splitbill.auth.service
+package com.splitbill.auth.service.authentication
 
-import com.splitbill.auth.model.LoginModel
 import com.splitbill.auth.repository.LoginRepository
+import com.splitbill.auth.service.token.TokenService
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class TokenAuthenticationService(
-        val tokenService: TokenService,
-        val passwordEncoder: PasswordEncoder,
-        val loginRepository: LoginRepository
+    val tokenService: TokenService,
+    val passwordEncoder: PasswordEncoder,
+    val loginRepository: LoginRepository
 ): AuthenticationService {
 
     override fun login(email: String, password: String): String? {
@@ -25,11 +25,5 @@ class TokenAuthenticationService(
         val claims = tokenService.verify(token)
         val email = claims["email"]
         return loginRepository.findByEmail(email)
-    }
-
-    // TODO("Should separate this method in other service")
-    override fun createLogin(userId: String, email: String, password: String) {
-        val passwordHash = passwordEncoder.encode(password)
-        loginRepository.save(LoginModel(userId, email, passwordHash))
     }
 }

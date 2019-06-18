@@ -1,4 +1,4 @@
-package com.splitbill.auth.service
+package com.splitbill.auth.service.token
 
 interface TokenService {
 

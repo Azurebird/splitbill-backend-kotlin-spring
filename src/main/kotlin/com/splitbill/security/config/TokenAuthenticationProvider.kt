@@ -1,6 +1,6 @@
 package com.splitbill.security.config
 
-import com.splitbill.auth.service.AuthenticationService
+import com.splitbill.auth.service.authentication.AuthenticationService
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider
 import org.springframework.security.core.userdetails.UserDetails

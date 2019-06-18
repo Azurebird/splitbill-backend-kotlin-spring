@@ -1,15 +1,13 @@
-package com.splitbill.auth.service
+package com.splitbill.auth.service.token
 
 import io.jsonwebtoken.Clock
 import io.jsonwebtoken.Jwts
-import io.jsonwebtoken.SignatureAlgorithm
 import org.joda.time.DateTime
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.util.*
 import io.jsonwebtoken.impl.compression.GzipCompressionCodec
 import io.jsonwebtoken.Claims
-import io.jsonwebtoken.io.Encoders
 import io.jsonwebtoken.security.Keys
 
 

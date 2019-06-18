@@ -1,17 +1,8 @@
-package com.splitbill.auth.service
+package com.splitbill.auth.service.authentication
 
 import org.springframework.security.core.userdetails.UserDetails
 
 interface AuthenticationService {
-
-    /**
-     * TODO
-     *
-     * @param userId
-     * @param email
-     * @param password
-     */
-    fun createLogin(userId: String, email: String, password: String)
 
     /**
      * TODO
