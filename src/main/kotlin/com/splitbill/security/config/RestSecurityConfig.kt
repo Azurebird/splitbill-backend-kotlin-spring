@@ -11,13 +11,14 @@ import org.springframework.security.web.util.matcher.OrRequestMatcher
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler
 import org.springframework.boot.ansi.AnsiOutput.setEnabled
 import org.springframework.boot.web.servlet.FilterRegistrationBean
+import org.springframework.http.HttpMethod
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter
 
 
 @Configuration
 @EnableWebSecurity
 class RestSecurityConfig(
-        val tokenAuthenticationProvider: TokenAuthenticationProvider
+    val tokenAuthenticationProvider: TokenAuthenticationProvider
 ): WebSecurityConfigurerAdapter() {
 
     private val publicUrls = OrRequestMatcher(
@@ -36,11 +37,12 @@ class RestSecurityConfig(
     override fun configure(http: HttpSecurity) {
         http.csrf().disable()
 
-        http
-                .authenticationProvider(tokenAuthenticationProvider)
-                .addFilterBefore(restAuthenticationFilter(), AnonymousAuthenticationFilter::class.java)
-                .authorizeRequests()
-                .anyRequest().permitAll()
+        http.authenticationProvider(tokenAuthenticationProvider)
+            .addFilterBefore(restAuthenticationFilter(), AnonymousAuthenticationFilter::class.java)
+            .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/profile/").permitAll()
+                .antMatchers(HttpMethod.POST, "/login/").permitAll()
+                .anyRequest().authenticated()
     }
 
     @Bean

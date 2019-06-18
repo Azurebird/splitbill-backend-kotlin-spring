@@ -14,7 +14,7 @@ class LoginController(
 
     @PostMapping("/")
     fun login(
-            @RequestParam("username") username: String,
+            @RequestParam("email") username: String,
             @RequestParam("password") password: String
     ): String {
         return loginService.login(username, password) ?: throw RuntimeException("invalid login and/or password")

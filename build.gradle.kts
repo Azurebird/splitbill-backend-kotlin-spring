@@ -24,7 +24,10 @@ repositories {
 
 dependencies {
 	implementation ("joda-time:joda-time:2.10.2")
-	implementation("io.jsonwebtoken:jjwt:0.9.1")
+	implementation("io.jsonwebtoken:jjwt-api:0.10.5")
+	// TODO("Should investigate gradle runtime")
+	implementation("io.jsonwebtoken:jjwt-impl:0.10.5")
+	implementation("io.jsonwebtoken:jjwt-jackson:0.10.5")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 	implementation("org.springframework.boot:spring-boot-starter-web")
