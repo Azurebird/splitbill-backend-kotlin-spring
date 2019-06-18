@@ -2,7 +2,7 @@ package com.splitbill.auth.service
 
 import org.springframework.security.core.userdetails.UserDetails
 
-interface LoginService {
+interface AuthenticationService {
 
     /**
      * TODO
@@ -19,7 +19,7 @@ interface LoginService {
      * @param toString
      * @return
      */
-    fun findByToken(toString: String): UserDetails?
+    fun findByToken(token: String): UserDetails?
 
     /**
      * TODO
@@ -28,5 +28,5 @@ interface LoginService {
      * @param password
      * @return
      */
-    fun login(username: String, password: String): String?
+    fun login(email: String, password: String): String?
 }

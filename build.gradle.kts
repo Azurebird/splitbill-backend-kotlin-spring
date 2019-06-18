@@ -23,6 +23,7 @@ repositories {
 }
 
 dependencies {
+	implementation ("joda-time:joda-time:2.10.2")
 	implementation("io.jsonwebtoken:jjwt:0.9.1")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")

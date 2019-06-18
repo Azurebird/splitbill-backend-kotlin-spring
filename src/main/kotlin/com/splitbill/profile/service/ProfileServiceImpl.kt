@@ -1,14 +1,13 @@
 package com.splitbill.profile.service
 
-import com.splitbill.auth.service.LoginService
+import com.splitbill.auth.service.AuthenticationService
 import com.splitbill.profile.model.ProfileModel
 import com.splitbill.profile.repository.ProfileRepository
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ProfileServiceImpl(
-        val loginService: LoginService,
+        val loginService: AuthenticationService,
         val profileRepository: ProfileRepository): ProfileService {
 
     /**

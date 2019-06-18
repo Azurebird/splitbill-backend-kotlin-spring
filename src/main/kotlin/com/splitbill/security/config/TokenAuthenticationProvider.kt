@@ -1,7 +1,6 @@
 package com.splitbill.security.config
 
-import com.splitbill.auth.service.LoginService
-import org.springframework.security.authentication.AuthenticationProvider
+import com.splitbill.auth.service.AuthenticationService
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider
 import org.springframework.security.core.userdetails.UserDetails
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class TokenAuthenticationProvider(
-        val loginService: LoginService
+        val loginService: AuthenticationService
 ): AbstractUserDetailsAuthenticationProvider() {
 
     override fun retrieveUser(username: String?, authentication: UsernamePasswordAuthenticationToken?): UserDetails {
