@@ -2,13 +2,14 @@ package com.splitbill.auth.model
 
 import com.splitbill.common.model.Model
 import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 @Document("login") data class LoginModel(
     val userId: String,
-    val email: String,
+    @Indexed(unique = true) val email: String,
     val passwordHash: String
 ) : UserDetails, Model() {
 
