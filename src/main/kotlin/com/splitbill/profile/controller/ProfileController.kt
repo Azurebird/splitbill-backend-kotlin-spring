@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/profile")
 class ProfileController(
-        var profileService: ProfileService
+    var profileService: ProfileService
 ) {
 
     @PostMapping("/")

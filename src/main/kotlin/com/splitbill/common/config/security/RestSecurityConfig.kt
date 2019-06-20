@@ -16,12 +16,11 @@ import org.springframework.security.web.authentication.AnonymousAuthenticationFi
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-
 @Configuration
 @EnableWebSecurity
 class RestSecurityConfig(
     val tokenAuthenticationProvider: TokenAuthenticationProvider
-): WebSecurityConfigurerAdapter() {
+) : WebSecurityConfigurerAdapter() {
 
     /**
      * TODO("Pending to use this urls as the protected ones")
@@ -102,10 +101,9 @@ class RestSecurityConfig(
     @Bean
     fun successHandler(): SimpleUrlAuthenticationSuccessHandler {
         val successHandler = SimpleUrlAuthenticationSuccessHandler()
-        successHandler.setRedirectStrategy{ _: HttpServletRequest, _: HttpServletResponse, _: String -> }
+        successHandler.setRedirectStrategy { _: HttpServletRequest, _: HttpServletResponse, _: String -> }
         return successHandler
     }
-
 
     /**
      * Prevents any annotated filter to be added automatically by the spring IoC

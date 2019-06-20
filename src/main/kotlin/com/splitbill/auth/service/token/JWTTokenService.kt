@@ -10,14 +10,13 @@ import io.jsonwebtoken.impl.compression.GzipCompressionCodec
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.security.Keys
 
-
 @Service
 class JWTTokenService(
-        @Value("\${jwt.issuer:splitbill}") val issuer: String,
-        @Value("\${jwt.expiration-sec:86400}") val expirationSec: Int,
-        @Value("\${jwt.clock-skew-sec:300}") val clockSkewSec: Int,
-        @Value("\${jwt.secret:thisismysecretpasswordof32chars.}") secret: String
-): TokenService, Clock {
+    @Value("\${jwt.issuer:splitbill}") val issuer: String,
+    @Value("\${jwt.expiration-sec:86400}") val expirationSec: Int,
+    @Value("\${jwt.clock-skew-sec:300}") val clockSkewSec: Int,
+    @Value("\${jwt.secret:thisismysecretpasswordof32chars.}") secret: String
+) : TokenService, Clock {
 
     private val secretKey = Keys.hmacShaKeyFor(secret.toByteArray())
     private val compressionCodec = GzipCompressionCodec()
@@ -31,7 +30,7 @@ class JWTTokenService(
     }
 
     override fun untrusted(token: String): Map<String, String> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun verify(token: String): Map<String, String> {
@@ -67,14 +66,14 @@ class JWTTokenService(
             val expiresAt = now.plusSeconds(expiresInSec)
             claims.expiration = expiresAt.toDate()
         }
-        claims.putAll(attributes);
+        claims.putAll(attributes)
 
         return Jwts
-          .builder()
-          .setClaims(claims)
-          .signWith(secretKey)
-          .compressWith(compressionCodec)
-          .compact()
+            .builder()
+            .setClaims(claims)
+            .signWith(secretKey)
+            .compressWith(compressionCodec)
+            .compact()
     }
 
     private fun claimsToMap(toClaims: Claims): Map<String, String> {

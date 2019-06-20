@@ -12,11 +12,11 @@ class TokenAuthenticationService(
     val tokenService: TokenService,
     val passwordEncoder: PasswordEncoder,
     val loginRepository: LoginRepository
-): AuthenticationService {
+) : AuthenticationService {
 
     override fun authenticate(email: String, password: String): String? {
         val loginModel = loginRepository.findByEmail(email)
-        if(loginModel == null || !passwordEncoder.matches(password, loginModel.password)) {
+        if (loginModel == null || !passwordEncoder.matches(password, loginModel.password)) {
             throw InvalidCredentialsException()
         }
         return tokenService.permanentToken(mapOf("email" to email))

@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/login")
 class LoginController(
-        val authenticationService: AuthenticationService
+    val authenticationService: AuthenticationService
 ) {
 
     @PostMapping("/")
     fun login(
-            @RequestParam("email") username: String,
-            @RequestParam("password") password: String
+        @RequestParam("email") username: String,
+        @RequestParam("password") password: String
     ): ResponseEntity<TokenResponseEntity> {
         val tokenResponseEntity = TokenResponseEntity(authenticationService.authenticate(username, password))
         return ResponseEntity(tokenResponseEntity, HttpStatus.OK)

@@ -7,9 +7,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 
-
 @ControllerAdvice
-class RestResponseEntityExceptionHandler: ResponseEntityExceptionHandler() {
+class RestResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
 
     @ExceptionHandler(value = [RestHttpException::class])
     protected fun exceptionHandler(e: RestHttpException): ResponseEntity<ErrorResponse> {

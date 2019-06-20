@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @Configuration
 @EnableMongoAuditing
 @EnableMongoRepositories(basePackages = ["com.splitbill.*.repository"])
-class MongoConfig: AbstractMongoConfiguration() {
+class MongoConfig : AbstractMongoConfiguration() {
 
     override fun mongoClient(): MongoClient {
         return MongoClient("127.0.0.1", 27017)
@@ -18,5 +18,4 @@ class MongoConfig: AbstractMongoConfiguration() {
     override fun getDatabaseName(): String {
         return "test"
     }
-
 }

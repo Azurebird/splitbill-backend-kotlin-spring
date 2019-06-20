@@ -7,9 +7,10 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 @Document("login") data class LoginModel(
-        val userId: String,
-        val email: String,
-        val passwordHash: String): UserDetails, Model() {
+    val userId: String,
+    val email: String,
+    val passwordHash: String
+) : UserDetails, Model() {
 
     @Id
     var loginId: String? = null

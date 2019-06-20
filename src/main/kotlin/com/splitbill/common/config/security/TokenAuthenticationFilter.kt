@@ -11,9 +11,8 @@ import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import javax.servlet.FilterChain
 
-
-class TokenAuthenticationFilter (
-        requiresAuthenticationRequestMatcher: RequestMatcher
+class TokenAuthenticationFilter(
+    requiresAuthenticationRequestMatcher: RequestMatcher
 ) : AbstractAuthenticationProcessingFilter(requiresAuthenticationRequestMatcher) {
 
     override fun attemptAuthentication(request: HttpServletRequest?, response: HttpServletResponse?): Authentication {

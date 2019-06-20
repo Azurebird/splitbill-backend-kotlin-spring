@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 class LoginServiceImpl(
     val passwordEncoder: PasswordEncoder,
     val loginRepository: LoginRepository
-): LoginService {
+) : LoginService {
 
     override fun createLogin(userId: String, email: String, password: String) {
         val passwordHash = passwordEncoder.encode(password)

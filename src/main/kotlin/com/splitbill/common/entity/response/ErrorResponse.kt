@@ -9,4 +9,5 @@ package com.splitbill.common.entity.response
  */
 open class ErrorResponse(
     val message: String?,
-    val code: Int)
+    val code: Int
+)
