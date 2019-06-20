@@ -1,6 +1,8 @@
 package com.splitbill.auth.controller
 
 import com.splitbill.auth.service.authentication.AuthenticationService
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -16,7 +18,7 @@ class LoginController(
     fun login(
             @RequestParam("email") username: String,
             @RequestParam("password") password: String
-    ): String {
-        return authenticationService.login(username, password) ?: throw RuntimeException("invalid login and/or password")
+    ): ResponseEntity<String> {
+        return ResponseEntity(authenticationService.authenticate(username, password), HttpStatus.OK)
     }
 }

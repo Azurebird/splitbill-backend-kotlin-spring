@@ -23,6 +23,7 @@ repositories {
 }
 
 dependencies {
+	implementation("com.google.code.gson:gson:2.8.5")
 	implementation ("joda-time:joda-time:2.10.2")
 	implementation("io.jsonwebtoken:jjwt-api:0.10.5")
 	// TODO("Should investigate gradle runtime")

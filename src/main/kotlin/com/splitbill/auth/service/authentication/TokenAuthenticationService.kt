@@ -5,6 +5,8 @@ import com.splitbill.auth.service.token.TokenService
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import org.springframework.web.bind.annotation.ExceptionHandler
+import java.lang.Exception
 
 @Service
 class TokenAuthenticationService(
@@ -13,10 +15,10 @@ class TokenAuthenticationService(
     val loginRepository: LoginRepository
 ): AuthenticationService {
 
-    override fun login(email: String, password: String): String? {
+    override fun authenticate(email: String, password: String): String? {
         val loginModel = loginRepository.findByEmail(email)
         if(loginModel == null || !passwordEncoder.matches(password, loginModel.password)) {
-            TODO("throw exception")
+            throw RuntimeException("invalid login and/or password")
         }
         return tokenService.permanentToken(mapOf("email" to email))
     }

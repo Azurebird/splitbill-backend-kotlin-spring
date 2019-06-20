@@ -60,6 +60,7 @@ class RestSecurityConfig(
         http
             .authenticationProvider(tokenAuthenticationProvider)
             .addFilterBefore(restAuthenticationFilter(), AnonymousAuthenticationFilter::class.java)
+            .addFilterBefore(exceptionHandlerFilter(), TokenAuthenticationFilter::class.java)
             .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/profile/").permitAll()
                 .antMatchers(HttpMethod.POST, "/login/").permitAll()
@@ -82,6 +83,16 @@ class RestSecurityConfig(
         filter.setAuthenticationManager(authenticationManager())
         filter.setAuthenticationSuccessHandler(successHandler())
         return filter
+    }
+
+    /**
+     * Creates a new TokenAuthenticationFilter to be used for the protected urls
+     *
+     * @return A new TokenAuthenticationFilter
+     */
+    @Bean
+    fun exceptionHandlerFilter(): ExceptionHandlerFilter {
+        return ExceptionHandlerFilter()
     }
 
     /**

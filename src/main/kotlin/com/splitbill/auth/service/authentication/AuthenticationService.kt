@@ -19,5 +19,5 @@ interface AuthenticationService {
      * @param password
      * @return
      */
-    fun login(email: String, password: String): String?
+    fun authenticate(email: String, password: String): String?
 }
