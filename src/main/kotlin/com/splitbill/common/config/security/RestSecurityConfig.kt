@@ -24,7 +24,7 @@ class RestSecurityConfig(
 ): WebSecurityConfigurerAdapter() {
 
     /**
-     * TODO("Pending to use tis urls as the protected ones")
+     * TODO("Pending to use this urls as the protected ones")
      */
     private val publicUrls = OrRequestMatcher(
             AntPathRequestMatcher("/profile/"),

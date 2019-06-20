@@ -4,20 +4,7 @@ import org.springframework.security.core.userdetails.UserDetails
 
 interface AuthenticationService {
 
-    /**
-     * TODO
-     *
-     * @param toString
-     * @return
-     */
     fun findByToken(token: String): UserDetails?
 
-    /**
-     * TODO
-     *
-     * @param username
-     * @param password
-     * @return
-     */
     fun authenticate(email: String, password: String): String?
 }

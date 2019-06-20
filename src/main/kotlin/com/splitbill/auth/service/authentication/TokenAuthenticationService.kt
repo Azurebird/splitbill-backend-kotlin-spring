@@ -3,14 +3,9 @@ package com.splitbill.auth.service.authentication
 import com.splitbill.auth.repository.LoginRepository
 import com.splitbill.auth.service.token.TokenService
 import com.splitbill.common.exception.InvalidCredentialsException
-import org.springframework.http.HttpStatus
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.ExceptionHandler
-import org.springframework.web.server.ResponseStatusException
-import java.lang.Exception
-import java.lang.IllegalArgumentException
 
 @Service
 class TokenAuthenticationService(
