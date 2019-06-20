@@ -1,6 +1,6 @@
 package com.splitbill.profile.model
 
-import com.splitbill.model.Model
+import com.splitbill.common.model.Model
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.Transient
 import org.springframework.data.mongodb.core.mapping.Document

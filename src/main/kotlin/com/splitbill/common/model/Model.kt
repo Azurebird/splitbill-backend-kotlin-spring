@@ -1,4 +1,4 @@
-package com.splitbill.model
+package com.splitbill.common.model
 
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate

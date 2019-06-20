@@ -1,7 +1,7 @@
-package com.splitbill.config.security
+package com.splitbill.common.config.security
 
 import com.google.gson.Gson
-import com.splitbill.entity.response.JwtErrorResponse
+import com.splitbill.common.entity.response.JwtErrorResponse
 import io.jsonwebtoken.JwtException
 import org.springframework.http.HttpStatus
 import org.springframework.web.filter.OncePerRequestFilter

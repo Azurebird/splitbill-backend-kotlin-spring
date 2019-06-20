@@ -2,6 +2,7 @@ package com.splitbill.auth.service.authentication
 
 import com.splitbill.auth.repository.LoginRepository
 import com.splitbill.auth.service.token.TokenService
+import com.splitbill.common.exception.InvalidCredentialsException
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -21,7 +22,7 @@ class TokenAuthenticationService(
     override fun authenticate(email: String, password: String): String? {
         val loginModel = loginRepository.findByEmail(email)
         if(loginModel == null || !passwordEncoder.matches(password, loginModel.password)) {
-            throw IllegalArgumentException("Invalid login and/or password")
+            throw InvalidCredentialsException()
         }
         return tokenService.permanentToken(mapOf("email" to email))
     }

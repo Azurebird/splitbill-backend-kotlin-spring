@@ -1,4 +1,4 @@
-package com.splitbill.config.db
+package com.splitbill.common.config.db
 
 import com.mongodb.MongoClient
 import org.springframework.context.annotation.Configuration
