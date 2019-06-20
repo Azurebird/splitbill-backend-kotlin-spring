@@ -1,7 +1,7 @@
-package com.splitbill.security.config
+package com.splitbill.config.security
 
 import com.google.gson.Gson
-import com.splitbill.entity.JwtErrorResponse
+import com.splitbill.entity.response.JwtErrorResponse
 import io.jsonwebtoken.JwtException
 import org.springframework.http.HttpStatus
 import org.springframework.web.filter.OncePerRequestFilter
@@ -17,6 +17,7 @@ class ExceptionHandlerFilter: OncePerRequestFilter() {
             filterChain.doFilter(request, response)
         } catch (jwtException: JwtException) {
             logger.debug("A jwt exception occurred", jwtException)
+            response.contentType = "application/json"
             response.status = HttpStatus.BAD_REQUEST.value()
             response.writer.write(Gson().toJson(JwtErrorResponse("Invalid token")))
         }

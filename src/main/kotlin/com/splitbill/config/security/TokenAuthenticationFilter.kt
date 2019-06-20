@@ -1,4 +1,4 @@
-package com.splitbill.security.config
+package com.splitbill.config.security
 
 import org.springframework.http.HttpHeaders
 import org.springframework.security.core.Authentication

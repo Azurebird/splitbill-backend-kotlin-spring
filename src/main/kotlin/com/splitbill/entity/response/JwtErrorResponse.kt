@@ -1,4 +1,4 @@
-package com.splitbill.entity
+package com.splitbill.entity.response
 
 import org.springframework.http.HttpStatus
 

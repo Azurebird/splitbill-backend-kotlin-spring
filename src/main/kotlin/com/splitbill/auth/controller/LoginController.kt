@@ -1,5 +1,6 @@
 package com.splitbill.auth.controller
 
+import com.splitbill.auth.entity.TokenResponseEntity
 import com.splitbill.auth.service.authentication.AuthenticationService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -18,7 +19,8 @@ class LoginController(
     fun login(
             @RequestParam("email") username: String,
             @RequestParam("password") password: String
-    ): ResponseEntity<String> {
-        return ResponseEntity(authenticationService.authenticate(username, password), HttpStatus.OK)
+    ): ResponseEntity<TokenResponseEntity> {
+        val tokenResponseEntity = TokenResponseEntity(authenticationService.authenticate(username, password))
+        return ResponseEntity(tokenResponseEntity, HttpStatus.OK)
     }
 }

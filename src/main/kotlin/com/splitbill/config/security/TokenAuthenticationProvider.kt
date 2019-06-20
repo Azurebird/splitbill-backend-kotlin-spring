@@ -1,4 +1,4 @@
-package com.splitbill.security.config
+package com.splitbill.config.security
 
 import com.splitbill.auth.service.authentication.AuthenticationService
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken

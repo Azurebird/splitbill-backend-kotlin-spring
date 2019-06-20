@@ -1,4 +1,4 @@
-package com.splitbill.entity
+package com.splitbill.entity.response
 
 /**
  * Response when an error occurs
@@ -8,6 +8,6 @@ package com.splitbill.entity
  * @property status
  */
 abstract class ErrorResponse(
-    private val message: String,
-    private val code: Int,
-    private val status: Int)
+    val message: String?,
+    val code: Int,
+    val status: Int)
