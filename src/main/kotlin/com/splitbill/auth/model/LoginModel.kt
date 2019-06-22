@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 @Document("login") data class LoginModel(
-    val userId: String,
+    val profileId: String,
     @Indexed(unique = true) val email: String,
     val passwordHash: String
 ) : UserDetails, Model() {
@@ -25,7 +25,7 @@ import org.springframework.security.core.userdetails.UserDetails
     }
 
     override fun getUsername(): String {
-        return this.email
+        return this.profileId
     }
 
     override fun isCredentialsNonExpired(): Boolean {
