@@ -1,0 +1,1 @@
+docker run -h mongo-service-replica --name mongo-service-replica -p 27017:27017 -d mongo:4.0.9 -replSet rs0
