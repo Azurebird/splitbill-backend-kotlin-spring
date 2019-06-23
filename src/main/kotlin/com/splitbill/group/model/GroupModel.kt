@@ -5,18 +5,17 @@ import org.bson.types.Decimal128
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
-@Document
-class GroupModel (
-    val name: String,
-    profileId: String
+@Document("group")
+data class GroupModel (
+    val name: String
 ) : Model() {
 
     @Id
     var groupId: String? = null
-    val profileIds = ArrayList<String>()
+    var profileIds = ArrayList<String>()
     var expenseGroup = ExpenseGroup()
 
-    init {
+    constructor(name: String, profileId: String) : this(name) {
         profileIds.add(profileId)
     }
 
@@ -24,17 +23,20 @@ class GroupModel (
         expenseGroup = ExpenseGroup()
     }
 
+    /**
+     * An expense group can only exists in a group and can only be created inside of it
+     */
     inner class ExpenseGroup {
-        val expenses = ArrayList<Expense>()
+        var expenses = ArrayList<Expense>()
 
         fun addExpense(profileId: String, detail: String, amount: Decimal128) {
             expenses.add(Expense(profileId, detail, amount))
         }
 
         inner class Expense(
-            val profileId: String,
-            val detail: String,
-            val amount: Decimal128
+            var profileId: String,
+            var detail: String,
+            var amount: Decimal128
         )
     }
 }
