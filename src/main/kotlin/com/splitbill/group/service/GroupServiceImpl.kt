@@ -1,7 +1,9 @@
 package com.splitbill.group.service
 
+import com.splitbill.common.exception.NotFoundException
 import com.splitbill.group.model.GroupModel
 import com.splitbill.group.repository.GroupRepository
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -17,7 +19,6 @@ class GroupServiceImpl(
      * @param profileId The profile id of the user who created it
      * @return
      */
-    @Transactional
     override fun create(name: String, profileId: String): GroupModel {
         return groupRepository.save(GroupModel(name, profileId))
     }
@@ -28,7 +29,6 @@ class GroupServiceImpl(
      * @param profileId The profileId
      * @return
      */
-    @Transactional(readOnly = true)
     override fun list(profileId: String): List<GroupModel> {
         return groupRepository.findAllByProfileIdsEquals(profileId)
     }
@@ -40,7 +40,10 @@ class GroupServiceImpl(
      * @param profileId
      * @return
      */
-    override fun settleUp(groupId: String, profileId: String): GroupModel.ExpenseGroup {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    @Transactional
+    override fun settleUp(groupId: String, profileId: String): GroupModel {
+        val group = groupRepository.findByIdOrNull(groupId) ?: throw NotFoundException("Group not found")
+        group.settleDown();
+        return groupRepository.save(group)
     }
 }

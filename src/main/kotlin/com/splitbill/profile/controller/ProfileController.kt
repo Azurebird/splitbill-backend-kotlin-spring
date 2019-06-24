@@ -12,7 +12,6 @@ class ProfileController(
 
     @PostMapping("/")
     fun register(@RequestBody profileModel: ProfileModel): ProfileModel {
-
         return profileService.createProfile(profileModel.email, profileModel.password)
     }
 }
