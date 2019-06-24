@@ -41,10 +41,8 @@ class LoginControllerTest {
         @Bean
         fun tokenAuthenticationProvider() = mockk<TokenAuthenticationProvider>(relaxed = true)
     }
-
     @Test
     fun `(SUCCESS) Login rest method made`() {
-
         val email = "mail@mail.com"
         val password = "password"
         val jwtToken = "thisisanexampletokenfortheunittest"
@@ -65,4 +63,29 @@ class LoginControllerTest {
         verify { authenticationService.authenticate(email, password) }
         confirmVerified(authenticationService)
     }
+
+    @Test
+    fun `(ERROR) email is required at login`() {
+        val password = "password"
+
+        mockMvc.perform(
+            MockMvcRequestBuilders.post("/login/")
+                .param("password", password))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest)
+
+        confirmVerified(authenticationService)
+    }
+
+    @Test
+    fun `(ERROR) password is required at login`() {
+        val email = "mail@mail.com"
+
+        mockMvc.perform(
+            MockMvcRequestBuilders.post("/login/")
+                .param("email", email))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest)
+
+        confirmVerified(authenticationService)
+    }
+
 }
