@@ -13,6 +13,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean
 import org.springframework.http.HttpMethod
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter
+import org.springframework.security.web.util.matcher.NegatedRequestMatcher
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
@@ -33,9 +34,7 @@ class RestSecurityConfig(
     /**
      * Protected urls patterns in which the authentication should be used
      */
-    private val protectedUrls = OrRequestMatcher(
-            AntPathRequestMatcher("/group/")
-    )
+    private val protectedUrls = NegatedRequestMatcher(publicUrls)
 
     /**
      * Adds the custom TokenAuthenticationProvider to the authentication manager
