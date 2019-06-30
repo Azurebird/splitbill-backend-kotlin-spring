@@ -6,7 +6,6 @@ import com.splitbill.group.repository.GroupRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.math.BigDecimal
 
 @Service
 class GroupServiceImpl(
@@ -44,7 +43,7 @@ class GroupServiceImpl(
     @Transactional
     override fun settleUp(groupId: String, profileId: String): GroupModel {
         val group = groupRepository.findByIdOrNull(groupId) ?: throw NotFoundException("Group not found")
-        group.settleDown();
+        group.settleDown()
         return groupRepository.save(group)
     }
 }

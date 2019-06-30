@@ -26,7 +26,7 @@ class ExpensesController(
     }
 
     @GetMapping("/")
-    fun getExpenses(@RequestParam groupId: String, auth: Authentication): ResponseEntity<List<Expense>> {
+    fun getExpenses(@RequestParam groupId: String, auth: Authentication): ResponseEntity<GroupModel> {
         val login = auth.principal as LoginModel
         return ResponseEntity.ok(expensesService.getExpenses(login.profileId, groupId))
     }

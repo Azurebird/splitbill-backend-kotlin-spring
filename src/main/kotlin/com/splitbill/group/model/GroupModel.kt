@@ -13,7 +13,7 @@ data class GroupModel (
     @Id
     var groupId: String? = null
     private var profileIds = ArrayList<String>()
-    private var expenses = ArrayList<Expense>()
+    var expenses = ArrayList<Expense>()
 
     constructor(name: String, profileId: String) : this(name) {
         profileIds.add(profileId)
