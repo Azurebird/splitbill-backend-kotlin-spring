@@ -1,6 +1,7 @@
 package com.splitbill.group.controller
 
 import com.splitbill.auth.model.LoginModel
+import com.splitbill.common.model.Model
 import com.splitbill.group.dto.CreateExpenseRequest
 import com.splitbill.group.model.Expense
 import com.splitbill.group.model.GroupModel
@@ -26,7 +27,7 @@ class ExpensesController(
     }
 
     @GetMapping("/")
-    fun getExpenses(@RequestParam groupId: String, auth: Authentication): ResponseEntity<GroupModel> {
+    fun getExpenses(@RequestParam groupId: String, auth: Authentication): ResponseEntity<List<Expense>> {
         val login = auth.principal as LoginModel
         return ResponseEntity.ok(expensesService.getExpenses(login.profileId, groupId))
     }

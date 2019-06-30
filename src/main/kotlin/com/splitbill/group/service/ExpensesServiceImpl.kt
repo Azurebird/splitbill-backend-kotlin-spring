@@ -1,6 +1,7 @@
 package com.splitbill.group.service
 
 import com.splitbill.common.exception.GroupNotFoundException
+import com.splitbill.common.model.Model
 import com.splitbill.group.model.Expense
 import com.splitbill.group.model.GroupModel
 import com.splitbill.group.repository.ExpensesRepository
@@ -21,7 +22,7 @@ class ExpensesServiceImpl(
         expensesRepository.save(group)
     }
 
-    override fun getExpenses(profileId: String, groupId: String): GroupModel {
-        return expensesRepository.findOneByProfileIdsAndGroupId(profileId, groupId)
+    override fun getExpenses(profileId: String, groupId: String): List<Expense> {
+        return expensesRepository.findOneByProfileIdsAndGroupId(profileId, groupId).getExpenses()
     }
 }
