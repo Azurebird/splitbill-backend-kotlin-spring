@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document
     @Id var profileId: String? = null
 
     @PersistenceConstructor
-    constructor(email: String): this(email, "")
+    constructor(email: String) : this(email, "")
 
     fun deletePassword() {
         this.password = ""
