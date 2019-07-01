@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration
 class MongoConfig : AbstractMongoClientConfiguration() {
 
     override fun mongoClient(): MongoClient {
-        return MongoClients.create("mongodb://localhost:27017/?replicaSet=rs0")
+        return MongoClients.create("mongodb://localhost:27017/")
     }
 
     override fun getDatabaseName(): String {
