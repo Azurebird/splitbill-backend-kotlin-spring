@@ -6,7 +6,6 @@ import com.splitbill.common.exception.UniqueAlreadyExistsException
 import com.splitbill.profile.model.ProfileModel
 import com.splitbill.profile.repository.ProfileRepository
 import org.springframework.dao.DuplicateKeyException
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
 @Service

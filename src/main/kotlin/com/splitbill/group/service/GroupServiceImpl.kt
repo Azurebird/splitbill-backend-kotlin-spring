@@ -1,7 +1,6 @@
 package com.splitbill.group.service
 
 import com.splitbill.common.exception.GroupNotFoundException
-import com.splitbill.common.exception.NotFoundException
 import com.splitbill.group.model.GroupModel
 import com.splitbill.group.repository.group.GroupRepository
 import com.splitbill.profile.service.ProfileService
