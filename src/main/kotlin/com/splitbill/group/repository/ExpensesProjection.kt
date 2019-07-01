@@ -8,3 +8,8 @@ interface ExpensesOnly {
 
     fun getExpenses(): List<Expense>
 }
+
+interface NameOnly {
+
+    fun getName(): String
+}

@@ -1,9 +1,7 @@
 package com.splitbill.group.service
 
 import com.splitbill.common.exception.GroupNotFoundException
-import com.splitbill.common.model.Model
 import com.splitbill.group.model.Expense
-import com.splitbill.group.model.GroupModel
 import com.splitbill.group.repository.ExpensesRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service

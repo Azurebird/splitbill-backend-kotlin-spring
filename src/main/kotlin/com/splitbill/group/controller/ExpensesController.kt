@@ -1,10 +1,8 @@
 package com.splitbill.group.controller
 
 import com.splitbill.auth.model.LoginModel
-import com.splitbill.common.model.Model
 import com.splitbill.group.dto.CreateExpenseRequest
 import com.splitbill.group.model.Expense
-import com.splitbill.group.model.GroupModel
 import com.splitbill.group.service.ExpensesService
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.Authentication

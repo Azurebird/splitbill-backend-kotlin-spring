@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 import java.math.BigDecimal
 
 @Document("group")
-data class GroupModel (
+data class GroupModel(
     val name: String
 ) : Model() {
 
