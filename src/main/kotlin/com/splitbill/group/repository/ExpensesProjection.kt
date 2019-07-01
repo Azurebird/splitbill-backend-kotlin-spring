@@ -1,4 +1,4 @@
-package com.splitbill.group.repository.projection
+package com.splitbill.group.repository
 
 import com.splitbill.group.model.Expense
 
