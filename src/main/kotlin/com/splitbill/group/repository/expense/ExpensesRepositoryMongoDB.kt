@@ -1,3 +1,3 @@
-package com.splitbill.group.repository
+package com.splitbill.group.repository.expense
 
 interface ExpensesRepositoryMongoDB : ExpensesRepository

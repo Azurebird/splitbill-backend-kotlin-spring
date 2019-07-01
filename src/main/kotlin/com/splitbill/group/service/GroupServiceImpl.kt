@@ -2,7 +2,7 @@ package com.splitbill.group.service
 
 import com.splitbill.common.exception.NotFoundException
 import com.splitbill.group.model.GroupModel
-import com.splitbill.group.repository.GroupRepository
+import com.splitbill.group.repository.group.GroupRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

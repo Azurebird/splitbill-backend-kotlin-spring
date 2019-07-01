@@ -1,4 +1,4 @@
-package com.splitbill.group.repository
+package com.splitbill.group.repository.expense
 
 import com.splitbill.group.model.GroupModel
 import org.springframework.data.repository.CrudRepository
