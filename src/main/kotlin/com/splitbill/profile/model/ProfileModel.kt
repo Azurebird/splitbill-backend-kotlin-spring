@@ -2,6 +2,7 @@ package com.splitbill.profile.model
 
 import com.splitbill.common.model.Model
 import org.springframework.data.annotation.Id
+import org.springframework.data.annotation.PersistenceConstructor
 import org.springframework.data.annotation.Transient
 import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
@@ -12,6 +13,9 @@ import org.springframework.data.mongodb.core.mapping.Document
 ) : Model() {
 
     @Id var profileId: String? = null
+
+    @PersistenceConstructor
+    constructor(email: String): this(email, "")
 
     fun deletePassword() {
         this.password = ""
