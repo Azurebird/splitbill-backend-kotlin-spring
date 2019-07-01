@@ -1,10 +1,12 @@
 package com.splitbill.profile.service
 
 import com.splitbill.auth.service.login.LoginService
+import com.splitbill.common.exception.NotFoundException
 import com.splitbill.common.exception.UniqueAlreadyExistsException
 import com.splitbill.profile.model.ProfileModel
 import com.splitbill.profile.repository.ProfileRepository
 import org.springframework.dao.DuplicateKeyException
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
 @Service
@@ -29,5 +31,15 @@ class ProfileServiceImpl(
         } catch (e: DuplicateKeyException) {
             throw UniqueAlreadyExistsException("That username already exists")
         }
+    }
+
+    /**
+     * Gets a profile given its id, if it not exists a NotFoundException is thrown
+     *
+     * @param profileId The profileId
+     * @return
+     */
+    override fun getProfileByEmail(email: String): ProfileModel {
+        return profileRepository.findByEmail(email) ?: throw NotFoundException("Profile does not exists")
     }
 }

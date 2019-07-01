@@ -12,7 +12,7 @@ data class GroupModel(
 
     @Id
     var groupId: String? = null
-    private var profileIds = ArrayList<String>()
+    private var profileIds = HashSet<String>()
     var expenses = ArrayList<Expense>()
 
     constructor(name: String, profileId: String) : this(name) {
@@ -25,6 +25,10 @@ data class GroupModel(
 
     fun addExpense(profileId: String, detail: String, amount: BigDecimal) {
         expenses.add(Expense(profileId, detail, amount))
+    }
+
+    fun addNewProfile(profileId: String): Boolean {
+        return profileIds.add(profileId)
     }
 }
 

@@ -5,4 +5,7 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.data.repository.NoRepositoryBean
 
 @NoRepositoryBean
-interface ProfileRepository : CrudRepository<ProfileModel, String>
+interface ProfileRepository : CrudRepository<ProfileModel, String> {
+
+    fun findByEmail(email: String): ProfileModel?
+}

@@ -1,14 +1,22 @@
 package com.splitbill.group.service
 
+import com.splitbill.common.exception.GroupNotFoundException
 import com.splitbill.common.exception.NotFoundException
 import com.splitbill.group.model.GroupModel
 import com.splitbill.group.repository.group.GroupRepository
+import com.splitbill.profile.service.ProfileService
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
+/**
+ * Group service in charge o
+ *
+ * @property groupRepository
+ */
 @Service
 class GroupServiceImpl(
+    val profileService: ProfileService,
     val groupRepository: GroupRepository
 ) : GroupService {
 
@@ -42,8 +50,16 @@ class GroupServiceImpl(
      */
     @Transactional
     override fun settleUp(groupId: String, profileId: String): GroupModel {
-        val group = groupRepository.findByIdOrNull(groupId) ?: throw NotFoundException("Group not found")
+        val group = groupRepository.findByIdOrNull(groupId) ?: throw GroupNotFoundException()
         group.settleDown()
         return groupRepository.save(group)
+    }
+
+    @Transactional
+    override fun addProfile(groupId: String, email: String) {
+        val group = groupRepository.findByIdOrNull(groupId) ?: throw GroupNotFoundException()
+        val profile = profileService.getProfileByEmail(email)
+        val wasAdded = group.addNewProfile(profile.profileId!!)
+        if (wasAdded) groupRepository.save(group)
     }
 }

@@ -9,4 +9,6 @@ interface GroupService {
     fun list(profileId: String): List<GroupModel>
 
     fun settleUp(groupId: String, profileId: String): GroupModel
+
+    fun addProfile(groupId: String, email: String)
 }

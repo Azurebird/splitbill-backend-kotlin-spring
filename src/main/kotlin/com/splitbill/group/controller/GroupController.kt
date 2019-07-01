@@ -23,6 +23,15 @@ class GroupController(
         return ResponseEntity(groupService.create(name, login.profileId), HttpStatus.OK)
     }
 
+    @PostMapping("/profile")
+    fun addProfile(
+        @RequestParam("groupId") groupId: String,
+        @RequestParam("email") email: String
+    ): ResponseEntity<Any> {
+        groupService.addProfile(groupId, email)
+        return ResponseEntity.ok().build()
+    }
+
     @GetMapping("/")
     fun list(auth: Authentication): ResponseEntity<List<GroupModel>> {
         val login = auth.principal as LoginModel
