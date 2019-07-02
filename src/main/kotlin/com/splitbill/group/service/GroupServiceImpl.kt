@@ -48,7 +48,7 @@ class GroupServiceImpl(
      * @return
      */
     @Transactional
-    override fun settleUp(groupId: String, profileId: String): GroupModel {
+    override fun settleDown(groupId: String, profileId: String): GroupModel {
         val group = groupRepository.findByIdOrNull(groupId) ?: throw GroupNotFoundException()
         group.settleDown()
         return groupRepository.save(group)

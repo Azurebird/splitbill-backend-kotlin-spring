@@ -1,8 +1,7 @@
-package com.splitbill.profile.controller
+package com.splitbill.profile
 
-import com.splitbill.AppApplication
 import com.splitbill.auth.repository.LoginRepository
-import com.splitbill.common.config.db.MongoConfig
+import com.splitbill.common.config.db.IntegrationTest
 import com.splitbill.profile.model.ProfileModel
 import com.splitbill.profile.repository.ProfileRepository
 import io.jsonwebtoken.lang.Assert
@@ -10,15 +9,12 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.boot.test.web.client.getForEntity
 import org.springframework.boot.test.web.client.postForEntity
 import org.springframework.http.HttpStatus
 
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-    classes = [AppApplication::class, MongoConfig::class])
+@IntegrationTest
 class CreateProfileIntegrationTest(
     @Autowired val loginRepository: LoginRepository,
     @Autowired val profileRepository: ProfileRepository,
