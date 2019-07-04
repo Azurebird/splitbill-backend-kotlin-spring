@@ -14,7 +14,7 @@ class TokenAuthenticationService(
     val loginRepository: LoginRepository
 ) : AuthenticationService {
 
-    override fun authenticate(email: String, password: String): String? {
+    override fun authenticate(email: String, password: String): String {
         val loginModel = loginRepository.findByEmail(email)
         if (loginModel == null || !passwordEncoder.matches(password, loginModel.password)) {
             throw InvalidCredentialsException()

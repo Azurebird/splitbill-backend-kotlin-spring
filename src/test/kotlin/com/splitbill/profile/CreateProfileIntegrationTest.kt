@@ -1,7 +1,8 @@
 package com.splitbill.profile
 
 import com.splitbill.auth.repository.LoginRepository
-import com.splitbill.common.config.db.IntegrationTest
+import com.splitbill.common.IntegrationTest
+import com.splitbill.common.util.MongoUtils
 import com.splitbill.profile.model.ProfileModel
 import com.splitbill.profile.repository.ProfileRepository
 import io.jsonwebtoken.lang.Assert
@@ -23,8 +24,7 @@ class CreateProfileIntegrationTest(
 
     @BeforeAll
     fun clean() {
-        loginRepository.deleteAll()
-        profileRepository.deleteAll()
+        MongoUtils.cleanDB()
     }
 
     @Test

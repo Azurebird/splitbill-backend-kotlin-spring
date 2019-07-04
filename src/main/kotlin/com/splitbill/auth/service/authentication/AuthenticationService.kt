@@ -6,5 +6,5 @@ interface AuthenticationService {
 
     fun findByToken(token: String): UserDetails?
 
-    fun authenticate(email: String, password: String): String?
+    fun authenticate(email: String, password: String): String
 }
