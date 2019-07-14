@@ -2,7 +2,8 @@ package com.splitbill.profile.service
 
 import com.splitbill.auth.service.login.LoginService
 import com.splitbill.common.exception.NotFoundException
-import com.splitbill.common.exception.UniqueAlreadyExistsException
+import com.splitbill.common.exception.ProfileNotFoundException
+import com.splitbill.common.exception.UserAlreadyExistsException
 import com.splitbill.profile.model.ProfileModel
 import com.splitbill.profile.repository.ProfileRepository
 import org.springframework.dao.DuplicateKeyException
@@ -28,7 +29,7 @@ class ProfileServiceImpl(
             newProfile.deletePassword()
             return newProfile
         } catch (e: DuplicateKeyException) {
-            throw UniqueAlreadyExistsException("That username already exists")
+            throw UserAlreadyExistsException()
         }
     }
 
@@ -39,6 +40,6 @@ class ProfileServiceImpl(
      * @return
      */
     override fun getProfileByEmail(email: String): ProfileModel {
-        return profileRepository.findByEmail(email) ?: throw NotFoundException("Profile does not exists")
+        return profileRepository.findByEmail(email) ?: throw ProfileNotFoundException()
     }
 }

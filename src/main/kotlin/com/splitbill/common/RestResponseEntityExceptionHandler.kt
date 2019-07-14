@@ -25,7 +25,7 @@ class RestResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
      */
     @ExceptionHandler(value = [RestHttpException::class])
     protected fun restExceptionHandler(e: RestHttpException): ResponseEntity<ErrorResponse> {
-        return ResponseEntity(ErrorResponse(e.message, e.httpStatus.value()), e.httpStatus)
+        return ResponseEntity(ErrorResponse(e.message, e.errorCode), e.httpStatus)
     }
 
     /**
@@ -41,6 +41,9 @@ class RestResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
         return ResponseEntity(ErrorResponse(message, HttpStatus.INTERNAL_SERVER_ERROR.value()), HttpStatus.INTERNAL_SERVER_ERROR)
     }
 
+    /**
+     * Overrides de upper method to encapsulate commong errors into an error response
+     */
     override fun handleExceptionInternal(e: Exception, body: Any?, headers: HttpHeaders, status: HttpStatus, request: WebRequest): ResponseEntity<Any> {
         logger.debug(e.message, e)
         return super.handleExceptionInternal(e, ErrorResponse(e.message, status.value()), headers, status, request)
