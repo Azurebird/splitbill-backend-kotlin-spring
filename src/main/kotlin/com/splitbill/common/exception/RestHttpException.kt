@@ -15,4 +15,3 @@ abstract class RestHttpException(
     val httpStatus: HttpStatus,
     val errorCode: Int
 ) : RuntimeException(message)
-

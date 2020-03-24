@@ -1,7 +1,6 @@
 package com.splitbill.profile.service
 
 import com.splitbill.auth.service.login.LoginService
-import com.splitbill.common.exception.NotFoundException
 import com.splitbill.common.exception.ProfileNotFoundException
 import com.splitbill.common.exception.UserAlreadyExistsException
 import com.splitbill.profile.model.ProfileModel

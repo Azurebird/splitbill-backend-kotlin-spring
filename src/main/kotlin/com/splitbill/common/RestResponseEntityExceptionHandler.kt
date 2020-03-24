@@ -24,8 +24,8 @@ class RestResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
      * @return A response entity with a message and status code obtained from the caught exception
      */
     @ExceptionHandler(value = [RestHttpException::class])
-    protected fun restExceptionHandler(e: RestHttpException): ResponseEntity<ErrorResponse> {
-        return ResponseEntity(ErrorResponse(e.message, e.errorCode), e.httpStatus)
+    protected fun restExceptionHandler(ex: RestHttpException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity(ErrorResponse(ex.message, ex.errorCode), ex.httpStatus)
     }
 
     /**

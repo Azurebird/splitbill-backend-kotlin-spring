@@ -1,12 +1,12 @@
-package com.splitbill.auth.service.token
 
+
+import com.splitbill.auth.service.token.TokenService
 import io.jsonwebtoken.Clock
 import io.jsonwebtoken.Jwts
 import org.joda.time.DateTime
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.util.*
-import io.jsonwebtoken.impl.compression.GzipCompressionCodec
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.security.Keys
 
@@ -19,7 +19,9 @@ class JWTTokenService(
 ) : TokenService, Clock {
 
     private val secretKey = Keys.hmacShaKeyFor(secret.toByteArray())
-    private val compressionCodec = GzipCompressionCodec()
+
+    // Just when compression is needed
+    // private val compressionCodec = GzipCompressionCodec()
 
     override fun permanentToken(attributes: Map<String, String>): String {
         return createNewToken(attributes, 0)
@@ -72,7 +74,7 @@ class JWTTokenService(
             .builder()
             .setClaims(claims)
             .signWith(secretKey)
-            .compressWith(compressionCodec)
+            // .compressWith(compressionCodec)
             .compact()
     }
 
